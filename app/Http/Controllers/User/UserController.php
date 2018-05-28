@@ -23,4 +23,29 @@ class UserController extends Controller
   {
     return view('users.index');
   }
+
+  public function search(Request $req)
+  {
+    $dados = $req->all();
+
+    $query = "";
+
+    if($dados['filter'] == 1)
+    {
+      $query = User::where('id','LIKE','%'.$dados['search'].'%')->get();
+    }
+    else if($dados['filter'] == 2)
+    {
+      $query = User::where('name','LIKE','%'.$dados['search'].'%')->get();
+    }
+    else if ($dados['filter'] == 3)
+    {
+      $query = User::where('email','LIKE','%'.$dados['search'].'%')->get();
+    }
+
+    echo $users;
+
+    return view('users.search',compact('users'));
+
+  }
 }
