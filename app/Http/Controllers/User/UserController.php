@@ -43,9 +43,9 @@ class UserController extends Controller
       $query = User::where('email','LIKE','%'.$dados['search'].'%')->get();
     }
 
-    echo $users;
+    echo $query->id;
 
-    return view('users.search',compact('users'));
+    //return view('users.search',compact('users'));
 
   }
 }
