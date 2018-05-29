@@ -28,24 +28,24 @@ class UserController extends Controller
   {
     $dados = $req->all();
 
-    $query = "";
+    $user = "";
 
     if($dados['filter'] == 1)
     {
-      $query = User::where('id','LIKE','%'.$dados['search'].'%')->get();
+      $user = User::where('id','like','%'.$dados['search'].'%');
     }
     else if($dados['filter'] == 2)
     {
-      $query = User::where('name','LIKE','%'.$dados['search'].'%')->get();
+
+      $user = User::where('name','like','%'.$dados['search'].'%');
     }
-    else if ($dados['filter'] == 3)
+    else if($dados['filter'] == 3)
     {
-      $query = User::where('email','LIKE','%'.$dados['search'].'%')->get();
+
+      $user = User::where('email','LIKE','%'.$dados['search'].'%');
     }
 
-    echo $query->id;
-
-    //return view('users.search',compact('users'));
+    return view('users.index')->with(['users'->$user->get()]  );
 
   }
 }
